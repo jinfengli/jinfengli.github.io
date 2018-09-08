@@ -1,0 +1,808 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Printer," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="最近一期做WiFi打印机打印小票功能，其中有一个功能点是把Logo打印在小票上面。">
+<meta name="keywords" content="Printer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android实现斑马Wifi打印机打印小票图片">
+<meta property="og:url" content="http://jinfengli.github.io/2017/11/17/zebra_printer_logo/index.html">
+<meta property="og:site_name" content="kingfeng&#39;s Notes">
+<meta property="og:description" content="最近一期做WiFi打印机打印小票功能，其中有一个功能点是把Logo打印在小票上面。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-26T06:47:48.276Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android实现斑马Wifi打印机打印小票图片">
+<meta name="twitter:description" content="最近一期做WiFi打印机打印小票功能，其中有一个功能点是把Logo打印在小票上面。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jinfengli.github.io/2017/11/17/zebra_printer_logo/"/>
+
+
+
+
+
+  <title> Android实现斑马Wifi打印机打印小票图片 | kingfeng's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">kingfeng's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">android程序员</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jinfengli.github.io/2017/11/17/zebra_printer_logo/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="kingfeng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="kingfeng's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="kingfeng's Notes" src="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android实现斑马Wifi打印机打印小票图片
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-17T17:19:00+08:00">
+                2017-11-17 17:19:00
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Printer/" itemprop="url" rel="index">
+                    <span itemprop="name">Printer</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/11/17/zebra_printer_logo/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/17/zebra_printer_logo/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近一期做WiFi打印机打印小票功能，其中有一个功能点是把Logo打印在小票上面。<br><a id="more"></a></p>
+<p>实现思路就是对网上的思路进行一下调整修改，方便Android端调用，很简单；<br><br>测试的打印机型号：Zebra GK888T </p>
+<h4 id="Bitmap-to-ZPL"><a href="#Bitmap-to-ZPL" class="headerlink" title="Bitmap to ZPL"></a>Bitmap to ZPL</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 把Bitmap --&gt; ZPL, 拼接成一个ZPL命令</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZPLImageConverter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Context context;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ZPLImageConverter</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> blackLimit = <span class="number">380</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> total;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> widthBytes;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> compressHex = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, String&gt; mapCode = <span class="keyword">new</span> HashMap&lt;Integer, String&gt;();</span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        mapCode.put(<span class="number">1</span>, <span class="string">"G"</span>);</span><br><span class="line">        mapCode.put(<span class="number">2</span>, <span class="string">"H"</span>);</span><br><span class="line">        mapCode.put(<span class="number">3</span>, <span class="string">"I"</span>);</span><br><span class="line">        mapCode.put(<span class="number">4</span>, <span class="string">"J"</span>);</span><br><span class="line">        mapCode.put(<span class="number">5</span>, <span class="string">"K"</span>);</span><br><span class="line">        mapCode.put(<span class="number">6</span>, <span class="string">"L"</span>);</span><br><span class="line">        mapCode.put(<span class="number">7</span>, <span class="string">"M"</span>);</span><br><span class="line">        mapCode.put(<span class="number">8</span>, <span class="string">"N"</span>);</span><br><span class="line">        mapCode.put(<span class="number">9</span>, <span class="string">"O"</span>);</span><br><span class="line">        mapCode.put(<span class="number">10</span>, <span class="string">"P"</span>);</span><br><span class="line">        mapCode.put(<span class="number">11</span>, <span class="string">"Q"</span>);</span><br><span class="line">        mapCode.put(<span class="number">12</span>, <span class="string">"R"</span>);</span><br><span class="line">        mapCode.put(<span class="number">13</span>, <span class="string">"S"</span>);</span><br><span class="line">        mapCode.put(<span class="number">14</span>, <span class="string">"T"</span>);</span><br><span class="line">        mapCode.put(<span class="number">15</span>, <span class="string">"U"</span>);</span><br><span class="line">        mapCode.put(<span class="number">16</span>, <span class="string">"V"</span>);</span><br><span class="line">        mapCode.put(<span class="number">17</span>, <span class="string">"W"</span>);</span><br><span class="line">        mapCode.put(<span class="number">18</span>, <span class="string">"X"</span>);</span><br><span class="line">        mapCode.put(<span class="number">19</span>, <span class="string">"Y"</span>);</span><br><span class="line">        mapCode.put(<span class="number">20</span>, <span class="string">"g"</span>);</span><br><span class="line">        mapCode.put(<span class="number">40</span>, <span class="string">"h"</span>);</span><br><span class="line">        mapCode.put(<span class="number">60</span>, <span class="string">"i"</span>);</span><br><span class="line">        mapCode.put(<span class="number">80</span>, <span class="string">"j"</span>);</span><br><span class="line">        mapCode.put(<span class="number">100</span>, <span class="string">"k"</span>);</span><br><span class="line">        mapCode.put(<span class="number">120</span>, <span class="string">"l"</span>);</span><br><span class="line">        mapCode.put(<span class="number">140</span>, <span class="string">"m"</span>);</span><br><span class="line">        mapCode.put(<span class="number">160</span>, <span class="string">"n"</span>);</span><br><span class="line">        mapCode.put(<span class="number">180</span>, <span class="string">"o"</span>);</span><br><span class="line">        mapCode.put(<span class="number">200</span>, <span class="string">"p"</span>);</span><br><span class="line">        mapCode.put(<span class="number">220</span>, <span class="string">"q"</span>);</span><br><span class="line">        mapCode.put(<span class="number">240</span>, <span class="string">"r"</span>);</span><br><span class="line">        mapCode.put(<span class="number">260</span>, <span class="string">"s"</span>);</span><br><span class="line">        mapCode.put(<span class="number">280</span>, <span class="string">"t"</span>);</span><br><span class="line">        mapCode.put(<span class="number">300</span>, <span class="string">"u"</span>);</span><br><span class="line">        mapCode.put(<span class="number">320</span>, <span class="string">"v"</span>);</span><br><span class="line">        mapCode.put(<span class="number">340</span>, <span class="string">"w"</span>);</span><br><span class="line">        mapCode.put(<span class="number">360</span>, <span class="string">"x"</span>);</span><br><span class="line">        mapCode.put(<span class="number">380</span>, <span class="string">"y"</span>);</span><br><span class="line">        mapCode.put(<span class="number">400</span>, <span class="string">"z"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">convertFromImg</span><span class="params">(Bitmap image)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line"></span><br><span class="line">        String cuerpo = createBody(image);</span><br><span class="line">        <span class="keyword">if</span>(compressHex)</span><br><span class="line">            cuerpo = encodeHexAscii(cuerpo);</span><br><span class="line">        <span class="keyword">return</span> headDoc() + cuerpo + footDoc();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">createBody</span><span class="params">(Bitmap originalImage)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line"><span class="comment">//        Graphics2D graphics = originalImage.createGraphics();</span></span><br><span class="line"><span class="comment">//        graphics.drawImage(originalImage, 0, 0, null);</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> height = originalImage.getHeight();</span><br><span class="line">        <span class="keyword">int</span> width = originalImage.getWidth();</span><br><span class="line">        <span class="keyword">int</span> rgb, red, green, blue, index=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">char</span> auxBinaryChar[] =  &#123;<span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>&#125;;</span><br><span class="line">        widthBytes = width/<span class="number">8</span>;</span><br><span class="line">        <span class="keyword">if</span>(width%<span class="number">8</span> &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            widthBytes= (((<span class="keyword">int</span>)(width / <span class="number">8</span>)) + <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            widthBytes= width/<span class="number">8</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.total = widthBytes*height;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> h = <span class="number">0</span>; h&lt;height; h++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> w = <span class="number">0</span>; w&lt;width; w++)</span><br><span class="line">            &#123;</span><br><span class="line"><span class="comment">//                rgb = originalImage.getRGB(w, h);</span></span><br><span class="line">                rgb = originalImage.getPixel(w, h);</span><br><span class="line">                red = (rgb &gt;&gt; <span class="number">16</span> ) &amp; <span class="number">0x000000FF</span>;</span><br><span class="line">                green = (rgb &gt;&gt; <span class="number">8</span> ) &amp; <span class="number">0x000000FF</span>;</span><br><span class="line">                blue = (rgb) &amp; <span class="number">0x000000FF</span>;</span><br><span class="line">                <span class="keyword">char</span> auxChar = <span class="string">'1'</span>;</span><br><span class="line">                <span class="keyword">int</span> totalColor = red + green + blue;</span><br><span class="line">                <span class="keyword">if</span>(totalColor&gt;blackLimit)&#123;</span><br><span class="line">                    auxChar = <span class="string">'0'</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                auxBinaryChar[index] = auxChar;</span><br><span class="line">                index++;</span><br><span class="line">                <span class="keyword">if</span>(index==<span class="number">8</span> || w==(width-<span class="number">1</span>))&#123;</span><br><span class="line">                    sb.append(fourByteBinary(<span class="keyword">new</span> String(auxBinaryChar)));</span><br><span class="line">                    auxBinaryChar =  <span class="keyword">new</span> <span class="keyword">char</span>[]&#123;<span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>, <span class="string">'0'</span>&#125;;</span><br><span class="line">                    index=<span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            sb.append(<span class="string">"\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">fourByteBinary</span><span class="params">(String binaryStr)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> decimal = Integer.parseInt(binaryStr,<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (decimal&gt;<span class="number">15</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> Integer.toString(decimal,<span class="number">16</span>).toUpperCase();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"0"</span> + Integer.toString(decimal,<span class="number">16</span>).toUpperCase();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">encodeHexAscii</span><span class="params">(String code)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> maxlinea =  widthBytes * <span class="number">2</span>;</span><br><span class="line">        StringBuffer sbCode = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        StringBuffer sbLinea = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">        String previousLine = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> counter = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">char</span> aux = code.charAt(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">boolean</span> firstChar = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt; code.length(); i++ )&#123;</span><br><span class="line">            <span class="keyword">if</span>(firstChar)&#123;</span><br><span class="line">                aux = code.charAt(i);</span><br><span class="line">                firstChar = <span class="keyword">false</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(code.charAt(i)==<span class="string">'\n'</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(counter&gt;=maxlinea &amp;&amp; aux==<span class="string">'0'</span>)&#123;</span><br><span class="line">                    sbLinea.append(<span class="string">","</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span>     <span class="keyword">if</span>(counter&gt;=maxlinea &amp;&amp; aux==<span class="string">'F'</span>)&#123;</span><br><span class="line">                    sbLinea.append(<span class="string">"!"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (counter&gt;<span class="number">20</span>)&#123;</span><br><span class="line">                    <span class="keyword">int</span> multi20 = (counter/<span class="number">20</span>)*<span class="number">20</span>;</span><br><span class="line">                    <span class="keyword">int</span> resto20 = (counter%<span class="number">20</span>);</span><br><span class="line">                    sbLinea.append(mapCode.get(multi20));</span><br><span class="line">                    <span class="keyword">if</span>(resto20!=<span class="number">0</span>)&#123;</span><br><span class="line">                        sbLinea.append(mapCode.get(resto20) + aux);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        sbLinea.append(aux);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    sbLinea.append(mapCode.get(counter) + aux);</span><br><span class="line">                    <span class="keyword">if</span>(mapCode.get(counter)==<span class="keyword">null</span>)&#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                counter = <span class="number">1</span>;</span><br><span class="line">                firstChar = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">if</span>(sbLinea.toString().equals(previousLine))&#123;</span><br><span class="line">                    sbCode.append(<span class="string">":"</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    sbCode.append(sbLinea.toString());</span><br><span class="line">                &#125;</span><br><span class="line">                previousLine = sbLinea.toString();</span><br><span class="line">                sbLinea.setLength(<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(aux == code.charAt(i))&#123;</span><br><span class="line">                counter++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(counter&gt;<span class="number">20</span>)&#123;</span><br><span class="line">                    <span class="keyword">int</span> multi20 = (counter/<span class="number">20</span>)*<span class="number">20</span>;</span><br><span class="line">                    <span class="keyword">int</span> resto20 = (counter%<span class="number">20</span>);</span><br><span class="line">                    sbLinea.append(mapCode.get(multi20));</span><br><span class="line">                    <span class="keyword">if</span>(resto20!=<span class="number">0</span>)&#123;</span><br><span class="line">                        sbLinea.append(mapCode.get(resto20) + aux);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        sbLinea.append(aux);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    sbLinea.append(mapCode.get(counter) + aux);</span><br><span class="line">                &#125;</span><br><span class="line">                counter = <span class="number">1</span>;</span><br><span class="line">                aux = code.charAt(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sbCode.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">headDoc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String str = <span class="comment">/*"^XA " +*/</span></span><br><span class="line">                <span class="string">"^FO10,50^GFA,"</span>+ total + <span class="string">","</span>+ total + <span class="string">","</span> + widthBytes +<span class="string">", "</span>;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">footDoc</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String str = <span class="string">"^FS"</span><span class="comment">/*+ "^XZ"*/</span>;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCompressHex</span><span class="params">(<span class="keyword">boolean</span> compressHex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.compressHex = compressHex;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBlacknessLimitPercentage</span><span class="params">(<span class="keyword">int</span> percentage)</span></span>&#123;</span><br><span class="line">        blackLimit = (percentage * <span class="number">768</span> / <span class="number">100</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="调用方式"><a href="#调用方式" class="headerlink" title="调用方式"></a>调用方式</h4><p>就是把Bitmap对象转化为ZPL编码格式，并把转化后的内容塞到ZPL命令中，和打印机通过Wifi 连接，把组装后的命令发给打印机就可以了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">ZPLImageConverter zp = <span class="keyword">new</span> ZPLImageConverter(context);</span><br><span class="line">zp.setCompressHex(<span class="keyword">true</span>);</span><br><span class="line">zp.setBlacknessLimitPercentage(<span class="number">50</span>);</span><br><span class="line">String str = zp.convertFromImg(myBitmap);</span><br><span class="line">zplStr += str;</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure></p>
+<p>其它命令的时候可以参考zebra打印机官方文档。</p>
+<h4 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h4><ol>
+<li><a href="http://labelary.com/viewer.html" target="_blank" rel="noopener">http://labelary.com/viewer.html</a>     （在线调整打印小票样式细节）</li>
+<li><a href="http://www.jcgonzalez.com/java-image-to-zpl-example" target="_blank" rel="noopener">http://www.jcgonzalez.com/java-image-to-zpl-example</a>  </li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="kingfeng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Printer/" rel="tag"># Printer</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/31/may-2017-summary/" rel="next" title="2017年5月">
+                <i class="fa fa-chevron-left"></i> 2017年5月
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/26/using-git-summary/" rel="prev" title="git 常用操作汇总">
+                git 常用操作汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140"
+               alt="kingfeng" />
+          <p class="site-author-name" itemprop="name">kingfeng</p>
+          <p class="site-description motion-element" itemprop="description">android 开发者</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinfengli" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.lujun.co/" title="卢俊_android" target="_blank">卢俊_android</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn/" title="markzhai" target="_blank">markzhai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.isming.me/" title="码农明明桑" target="_blank">码农明明桑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://liuzhichao.com/archives/" title="liuzhichao_android" target="_blank">liuzhichao_android</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://miao.hu/" title="紅一葉" target="_blank">紅一葉</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://weishu.me/" title="weishu_android" target="_blank">weishu_android</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bitmap-to-ZPL"><span class="nav-number">1.</span> <span class="nav-text">Bitmap to ZPL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用方式"><span class="nav-number">2.</span> <span class="nav-text">调用方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#refs"><span class="nav-number">3.</span> <span class="nav-text">refs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingfeng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'kingfeng';
+      var disqus_identifier = '2017/11/17/zebra_printer_logo/';
+
+      var disqus_title = "Android实现斑马Wifi打印机打印小票图片";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

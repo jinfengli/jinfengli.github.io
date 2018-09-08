@@ -1,0 +1,815 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,Chart," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="最近项目中很多地方使用了图表，使用的图表框架是MPAndroidChart, 由我负责来做。过程中也花了很多时间了解框架的API，走了挺多的弯路，记录下一些效果的实现：">
+<meta name="keywords" content="Android,Chart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MPAndroidChart图表框架使用Tips">
+<meta property="og:url" content="http://jinfengli.github.io/2016/12/07/mpandroidChart-using-tips/index.html">
+<meta property="og:site_name" content="kingfeng&#39;s Notes">
+<meta property="og:description" content="最近项目中很多地方使用了图表，使用的图表框架是MPAndroidChart, 由我负责来做。过程中也花了很多时间了解框架的API，走了挺多的弯路，记录下一些效果的实现：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-20T11:38:54.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MPAndroidChart图表框架使用Tips">
+<meta name="twitter:description" content="最近项目中很多地方使用了图表，使用的图表框架是MPAndroidChart, 由我负责来做。过程中也花了很多时间了解框架的API，走了挺多的弯路，记录下一些效果的实现：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jinfengli.github.io/2016/12/07/mpandroidChart-using-tips/"/>
+
+
+
+
+
+  <title> MPAndroidChart图表框架使用Tips | kingfeng's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">kingfeng's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">android程序员</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jinfengli.github.io/2016/12/07/mpandroidChart-using-tips/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="kingfeng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="kingfeng's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="kingfeng's Notes" src="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MPAndroidChart图表框架使用Tips
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-07T15:46:34+08:00">
+                2016-12-07 15:46:34
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/07/mpandroidChart-using-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/12/07/mpandroidChart-using-tips/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近项目中很多地方使用了图表，使用的图表框架是MPAndroidChart, 由我负责来做。<br>过程中也花了很多时间了解框架的API，走了挺多的弯路，记录下一些效果的实现：<br><a id="more"></a></p>
+<h1 id="Chart常用设置"><a href="#Chart常用设置" class="headerlink" title="Chart常用设置"></a>Chart常用设置</h1><p>chart的常用设置以及坐标轴配置。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">mChart</span><span class="selector-class">.setDrawValueAboveBar</span>(false);  </span><br><span class="line"><span class="selector-tag">mChart</span><span class="selector-class">.setScaleEnabled</span>(true);  <span class="comment">// 设置是否可缩放</span></span><br><span class="line"><span class="selector-tag">mChart</span><span class="selector-class">.setHighlightFullBarEnabled</span>(false); <span class="comment">// 点击bar高亮显示</span></span><br><span class="line"><span class="selector-tag">mChart</span><span class="selector-class">.getLegend</span>()<span class="selector-class">.setEnabled</span>(false);   <span class="comment">// Hide the legend</span></span><br></pre></td></tr></table></figure>
+<h2 id="XAxis-YAxis常用设置"><a href="#XAxis-YAxis常用设置" class="headerlink" title="XAxis,YAxis常用设置"></a>XAxis,YAxis常用设置</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">leftAxis.enableGridDashedLine(<span class="number">2f</span>, <span class="number">2f</span>, <span class="number">0f</span>); <span class="comment">// 画水平虚线</span></span><br><span class="line"></span><br><span class="line">xAxis.setLabelRotationAngle(<span class="number">-45f</span>); <span class="comment">// 逆时针旋转45度</span></span><br><span class="line">xAxis.setAxisLineColor(Color.parseColor(<span class="string">"#1591CC"</span>)); <span class="comment">// 设置坐标轴的颜色</span></span><br><span class="line">xAxis.setAxisLineWidth(<span class="number">2.0f</span>); <span class="comment">// 设置坐标轴的粗细</span></span><br></pre></td></tr></table></figure>
+<h2 id="强制展示XAxis上面的所有标签"><a href="#强制展示XAxis上面的所有标签" class="headerlink" title="强制展示XAxis上面的所有标签"></a>强制展示XAxis上面的所有标签</h2><p>默认是柱状图过密时，Label值会间隔展示，放大才会展示完全（这样实际挺人性化），但是项目需求时展示所有标签.<br>下面两个设置可以强制展示所有标签：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">xAxis</span><span class="selector-class">.setDrawLabels</span>(<span class="selector-tag">true</span>); </span><br><span class="line"><span class="selector-tag">xAxis</span><span class="selector-class">.setLabelCount</span>(<span class="selector-tag">xAxisTitles</span><span class="selector-class">.length</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="点击高亮标识"><a href="#点击高亮标识" class="headerlink" title="点击高亮标识"></a>点击高亮标识</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LineDataSet <span class="keyword">set</span>;</span><br><span class="line"><span class="keyword">set</span>.<span class="keyword">set</span>DrawHighlightIndicators<span class="params">(false)</span>; <span class="string">//</span> 取消点击线上的点展示十字标识</span><br><span class="line"><span class="keyword">set</span>.<span class="keyword">set</span>DrawValues<span class="params">(false)</span>; <span class="string">//</span> 不展示线上面点的值</span><br><span class="line"></span><br><span class="line">BarDataSet <span class="keyword">set</span>2;</span><br><span class="line"><span class="keyword">set</span>2.<span class="keyword">set</span>DrawValues<span class="params">(false)</span>;  <span class="string">//</span> 不展示bar上面点的值</span><br><span class="line"><span class="keyword">set</span>2.<span class="keyword">set</span>HighlightEnabled<span class="params">(true)</span>;  <span class="string">//</span> 设置柱状图bar点击高亮</span><br></pre></td></tr></table></figure>
+<h1 id="自定义MarkerView"><a href="#自定义MarkerView" class="headerlink" title="自定义MarkerView"></a>自定义MarkerView</h1><p>项目需求是：在柱状图根据leftYAxis单位展示markerview, 折线根据rightYAxis的单位展示markerview.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXMarkerView</span> <span class="keyword">extends</span> <span class="title">MarkerView</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> TextView tvContent;</span><br><span class="line">    <span class="keyword">private</span> RelativeLayout layout;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">XXMarkerView</span><span class="params">(Context context, <span class="keyword">int</span> layoutResource)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, layoutResource);</span><br><span class="line">        layout = (RelativeLayout) findViewById(R.id.tvRelativeLayout);</span><br><span class="line">        tvContent = (TextView) findViewById(R.id.tvContent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refreshContent</span><span class="params">(Entry e, Highlight highlight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">float</span> yValues = e.getY();</span><br><span class="line">        <span class="keyword">if</span> (e <span class="keyword">instanceof</span> BarEntry) &#123;</span><br><span class="line">             tvContent.setText(yValues); </span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(e <span class="keyword">instanceof</span> PieEntry) &#123; <span class="comment">// 饼图</span></span><br><span class="line">            <span class="comment">// set the entry-value as the display text</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="comment">// 这里展示直线单位，如果还有其它类型的Entry，继续写在上面else if()中</span></span><br><span class="line">            <span class="comment">// 折线数据源是Entry，public LineDataSet(List&lt;Entry&gt; yVals, String label)</span></span><br><span class="line">           tvContent.setText(yValues + <span class="string">"%"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getXOffset</span><span class="params">(<span class="keyword">float</span> xpos)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -(getWidth() / <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getYOffset</span><span class="params">(<span class="keyword">float</span> ypos)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -getHeight() - <span class="number">20</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用方式：<br><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">XXMarkerView <span class="keyword">mv</span> = <span class="keyword">new</span> XXMarkerView (context, <span class="keyword">R</span>.layout.marker_view)<span class="comment">;</span></span><br><span class="line">mChart.setMarkerView(<span class="keyword">mv</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="自定义Legend"><a href="#自定义Legend" class="headerlink" title="自定义Legend"></a>自定义Legend</h1><p>Legend使用官方说明：<a href="https://github.com/PhilJay/MPAndroidChart/wiki/Legend" target="_blank" rel="noopener">https://github.com/PhilJay/MPAndroidChart/wiki/Legend</a></p>
+<p>mChart.getLegend() 自带的产生的legend有局限，在Legend setPosition()设置BELOW_CHART_CENTER时，刷新图表高度会发生变化，有时候legend甚至不展示。<br>网上有的在说这是一个bug。<br>换一种解决办法：<br>可以隐藏Legend（ <code>mChart.getLegend().setEnabled(false);</code>），自己定义一个布局，设置为Chart的Legend。<br>很好地解决了我的问题，因为我的legend中不仅有纯色块，还有图片。</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private static void setCustomLegend(LinearLayout <span class="keyword">llCustomLegend, </span>Legend l, <span class="built_in">Context</span> <span class="built_in">context</span>) &#123;</span><br><span class="line">    <span class="keyword">llCustomLegend.removeAllViews();</span></span><br><span class="line"><span class="keyword"> </span>   int colors[] = l.getColors()<span class="comment">;</span></span><br><span class="line">    for (int i = <span class="number">0</span><span class="comment">; i &lt;= colors.length - 1; i++) &#123;</span></span><br><span class="line">        <span class="keyword">llCustomLegend.setPadding(10, </span><span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">        TextView tvColor = new TextView(<span class="built_in">context</span>)<span class="comment">;</span></span><br><span class="line">        tvColor.setPadding(<span class="number">10</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">        tvColor.setWidth(<span class="number">20</span>)<span class="comment">;</span></span><br><span class="line">        tvColor.setHeight(<span class="number">20</span>)<span class="comment">;</span></span><br><span class="line">        tvColor.setBackgroundColor(colors[i])<span class="comment">;</span></span><br><span class="line">        TextView tvLabel = new TextView(<span class="built_in">context</span>)<span class="comment">;</span></span><br><span class="line">        tvLabel.setPadding(<span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)<span class="comment">;</span></span><br><span class="line">        tvLabel.setTextSize(<span class="number">10</span>f)<span class="comment">;</span></span><br><span class="line">        tvLabel.setText(l.getLabel(i) + <span class="string">" "</span>)<span class="comment">;</span></span><br><span class="line">        tvLabel.setTextColor(ContextCompat.getColor(<span class="built_in">context</span>, R.color.deep_gray))<span class="comment">;</span></span><br><span class="line">        <span class="keyword">llCustomLegend.addView(tvColor);</span></span><br><span class="line"><span class="keyword"> </span>       <span class="keyword">llCustomLegend.addView(tvLabel);</span></span><br><span class="line"><span class="keyword"> </span>   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>想用图片时，改动一下实用Drawable即可。</p>
+<p>ref: 1. [pandroidchart-legend-customization][1]<br>[1]: <a href="http://stackoverflow.com/questions/29139061/mpandroidchart-legend-customization/29145904#29145904" target="_blank" rel="noopener">http://stackoverflow.com/questions/29139061/mpandroidchart-legend-customization/29145904#29145904</a>  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="kingfeng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Chart/" rel="tag"># Chart</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/25/serviceConnection-memory-leak/" rel="next" title="ServiceConnection 造成的内存泄漏">
+                <i class="fa fa-chevron-left"></i> ServiceConnection 造成的内存泄漏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/28/using-moco-build-simple-local-server/" rel="prev" title="使用Moco搭建简易本地测试服务器">
+                使用Moco搭建简易本地测试服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140"
+               alt="kingfeng" />
+          <p class="site-author-name" itemprop="name">kingfeng</p>
+          <p class="site-description motion-element" itemprop="description">android 开发者</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinfengli" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.lujun.co/" title="卢俊_android" target="_blank">卢俊_android</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn/" title="markzhai" target="_blank">markzhai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.isming.me/" title="码农明明桑" target="_blank">码农明明桑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://liuzhichao.com/archives/" title="liuzhichao_android" target="_blank">liuzhichao_android</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://miao.hu/" title="紅一葉" target="_blank">紅一葉</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://weishu.me/" title="weishu_android" target="_blank">weishu_android</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chart常用设置"><span class="nav-number">1.</span> <span class="nav-text">Chart常用设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#XAxis-YAxis常用设置"><span class="nav-number">1.1.</span> <span class="nav-text">XAxis,YAxis常用设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制展示XAxis上面的所有标签"><span class="nav-number">1.2.</span> <span class="nav-text">强制展示XAxis上面的所有标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#点击高亮标识"><span class="nav-number">1.3.</span> <span class="nav-text">点击高亮标识</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义MarkerView"><span class="nav-number">2.</span> <span class="nav-text">自定义MarkerView</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义Legend"><span class="nav-number">3.</span> <span class="nav-text">自定义Legend</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingfeng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'kingfeng';
+      var disqus_identifier = '2016/12/07/mpandroidChart-using-tips/';
+
+      var disqus_title = "MPAndroidChart图表框架使用Tips";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

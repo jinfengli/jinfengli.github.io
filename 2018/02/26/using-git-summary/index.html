@@ -1,0 +1,821 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="对一直以来使用的Git命令进行一下梳理总结，方便以后使用的时候查找;">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git 常用操作汇总">
+<meta property="og:url" content="http://jinfengli.github.io/2018/02/26/using-git-summary/index.html">
+<meta property="og:site_name" content="kingfeng&#39;s Notes">
+<meta property="og:description" content="对一直以来使用的Git命令进行一下梳理总结，方便以后使用的时候查找;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-07T05:47:34.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git 常用操作汇总">
+<meta name="twitter:description" content="对一直以来使用的Git命令进行一下梳理总结，方便以后使用的时候查找;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jinfengli.github.io/2018/02/26/using-git-summary/"/>
+
+
+
+
+
+  <title> git 常用操作汇总 | kingfeng's Notes </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">kingfeng's Notes</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle">android程序员</p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jinfengli.github.io/2018/02/26/using-git-summary/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="kingfeng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="kingfeng's Notes">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="kingfeng's Notes" src="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git 常用操作汇总
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-26T18:31:45+08:00">
+                2018-02-26 18:31:45
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Versioning/" itemprop="url" rel="index">
+                    <span itemprop="name">Versioning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/26/using-git-summary/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/26/using-git-summary/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对一直以来使用的Git命令进行一下梳理总结，方便以后使用的时候查找;<br><a id="more"></a></p>
+<h3 id="Git特点"><a href="#Git特点" class="headerlink" title="Git特点"></a>Git特点</h3><p>1、分布式VC；<br>2、客户端都具有代码仓库的完整镜像，每一次提取操作，都是对代码仓库的完整备份；<br>3、近乎所有的操作都是在本地执行；</p>
+<h3 id="几个最常用的"><a href="#几个最常用的" class="headerlink" title="几个最常用的"></a>几个最常用的</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git config <span class="params">--list</span>  <span class="string">//</span> 查看git 配置列表（类似于windows下面的<span class="keyword">set</span>命令）；</span><br><span class="line">git xxx <span class="params">--help</span>     <span class="string">//</span> 查看xxx 操作的官方说明文档</span><br><span class="line"><span class="keyword">history</span>            <span class="string">//</span> 查看近期使用的命令, 专治记不住</span><br><span class="line">git log            <span class="string">//</span> 显示提交日志列表， 按q enter键退出  </span><br><span class="line">git log -n 1       <span class="string">//</span> 查看最近的一条提交日志</span><br><span class="line">git log <span class="params">--pretty=oneline</span>   <span class="string">//</span>使用单行展示log日志</span><br><span class="line">git status         <span class="string">//</span>  查看项目中文件或目录的版本状态</span><br></pre></td></tr></table></figure>
+<h3 id="三种状态切换"><a href="#三种状态切换" class="headerlink" title="三种状态切换"></a>三种状态切换</h3><p>a.工作区<br>b.暂存区<br>c.版本库</p>
+<h4 id="a-gt-b"><a href="#a-gt-b" class="headerlink" title="a-&gt;b"></a>a-&gt;b</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> xxx    // xxx为具体的文件（夹）路径</span></span><br><span class="line"><span class="bash">git add .      // 添加新建和修改改动（add和. 之间要有空格）</span></span><br><span class="line"><span class="bash">git add -A     // 添加所有改动</span></span><br></pre></td></tr></table></figure>
+<h4 id="b-gt-a"><a href="#b-gt-a" class="headerlink" title="b-&gt;a"></a>b-&gt;a</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;file&gt;        <span class="comment">// &lt;file&gt;可以是文件或者文件夹路径 </span></span><br><span class="line"><span class="comment">// 如:</span></span><br><span class="line">git reset HEAD <span class="selector-tag">a</span><span class="selector-class">.json</span>     <span class="comment">// 把a.json 文件回到到 unstage 状态</span></span><br><span class="line">git reset HEAD src/       <span class="comment">// 把src下面的所有文件从暂存区回退到工作区</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git checkout -- file    <span class="comment">// 注意 "--" 后面要有空格    直接丢弃工作区， 要谨慎使用</span></span><br><span class="line">git checkout            <span class="comment">// 用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”</span></span><br><span class="line"></span><br><span class="line">git checkout .         <span class="comment">// 本地所有修改的，没有提交的，都返回到原来的状态；</span></span><br></pre></td></tr></table></figure>
+<h4 id="b-gt-c"><a href="#b-gt-c" class="headerlink" title="b-&gt;c"></a>b-&gt;c</h4><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">""</span>            <span class="string">//</span> 把处于暂存区的文件提交到版本库， xxx 为提交说明</span><br><span class="line">git commit <span class="params">--amend</span> -m <span class="string">"xxx"</span> <span class="string">//</span> 修改提交说明信息xxx，不需要打开vim窗口</span><br><span class="line">git commit <span class="params">--amend</span>          <span class="string">//</span> 会打开vim窗口中进行修改</span><br><span class="line">git log -n 1                <span class="string">//</span> 查看刚刚提交的这条日志信息</span><br><span class="line">git log -n 1 <span class="params">--stat</span>         <span class="string">//</span> 查看最近一次的commit都更改了哪些文件</span><br></pre></td></tr></table></figure>
+<h4 id="c-gt-b"><a href="#c-gt-b" class="headerlink" title="c-&gt;b"></a>c-&gt;b</h4><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset commit_id     // commit_id可以通过`git log`进行查看</span><br></pre></td></tr></table></figure>
+<h3 id="别名Alias"><a href="#别名Alias" class="headerlink" title="别名Alias"></a>别名Alias</h3><p>我们可以用git造一些更简单的命令，也更容易理解。</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> <span class="keyword">alias</span>.别名 <span class="string">'指定代码'</span></span><br></pre></td></tr></table></figure>
+<p>比如：上面我们想把提交日志列表一行显示，命令太长，不好记， 我们可以直接起个别名 log2<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> <span class="keyword">alias</span>.log2 <span class="comment">'log --pretty=oneline'</span></span><br></pre></td></tr></table></figure></p>
+<p> 以后我们想单行显示log列表时可以使用 <code>git log2</code>  就能达到效果。<br> 我们可以通过<code>git config --list</code> 在配置列表中查看自己设置的命令别名；</p>
+<p> 再举一个例子：<br> 取消暂存文件；<code>git config --global alias.unstage &#39;reset HEAD --&#39;</code><br> 我们就可以直接使用 <code>git unstage a.txt</code> 就可以把<code>a.txt</code> 再回退到 工作区了。</p>
+<p>在磁盘用户目录下，有一个从<code>.gitconfig</code> 文件，里面的内容如下：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">	<span class="attr">name</span> = ******</span><br><span class="line">	<span class="attr">email</span> = ******</span><br><span class="line">[core]</span><br><span class="line">	<span class="attr">autocrlf</span> = <span class="literal">false</span></span><br><span class="line">	<span class="attr">pager</span> = less</span><br><span class="line">[filter <span class="string">"lfs"</span>]</span><br><span class="line">	<span class="attr">clean</span> = git-lfs clean -- %f</span><br><span class="line">	<span class="attr">smudge</span> = git-lfs smudge -- %f</span><br><span class="line">	<span class="attr">process</span> = git-lfs filter-process</span><br><span class="line">	<span class="attr">required</span> = <span class="literal">true</span></span><br><span class="line">[alias]</span><br><span class="line">	<span class="attr">log2</span> = log <span class="attr">--pretty=oneline</span></span><br><span class="line">	<span class="attr">unstage</span> = reset HEAD --</span><br></pre></td></tr></table></figure></p>
+<h3 id="git-pull-amp-git-fetch"><a href="#git-pull-amp-git-fetch" class="headerlink" title="git pull &amp; git fetch"></a>git pull &amp; git fetch</h3><p>前者 &lt;==&gt; 后者 + git merge origin/master<br>后者只取，不合并。</p>
+<h3 id="gitignore忽略文件"><a href="#gitignore忽略文件" class="headerlink" title=".gitignore忽略文件"></a>.gitignore忽略文件</h3><p>我们可以通过<code>cat .gitignore</code> 来列出要忽略的文件模式；</p>
+<p>文件.gitignore 格式规范如下：<br>1、所有空行或者以#开头的行都会被Git忽略；<br>2、可以使用标准的glob模式匹配；<br>3、匹配模式最后跟反斜杠(/) 说明要忽略的是目录；<br>4、要忽略指定模式以外的文件或目录，可以在模式前加上感叹号取反；</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">*<span class="selector-class">.wpy</span>        <span class="comment">// 忽略说有以.wpy 结尾的文件</span></span><br><span class="line">!app<span class="selector-class">.wpy</span>     <span class="comment">// app.wpy 除外</span></span><br><span class="line">build/       <span class="comment">// 忽略build目录下的所有文件；</span></span><br><span class="line">/TODO        <span class="comment">// 仅仅忽略项目根目录下的TODO文件，不包括subdir/TODO</span></span><br><span class="line">doc<span class="comment">/*.txt    // 会忽略 doc/a.txt   但不会  doc/server/a.txt</span></span><br><span class="line"><span class="comment">doc/**/</span>*<span class="selector-class">.txt</span> <span class="comment">//忽略所有.txt 文件在doc/ 目录下。</span></span><br></pre></td></tr></table></figure>
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><p>一般在修改commit说明信息或者<code>git diff</code>对比的时候用到，按<code>i</code> 进行编辑vim窗口，编辑完成后， 按esc退出编辑；<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:wq</span>!    <span class="comment">// 保存(写入)退出</span></span><br><span class="line"><span class="selector-pseudo">:q</span>!     <span class="comment">// 不保存直接退出了</span></span><br></pre></td></tr></table></figure></p>
+<p>其它的自己可以查看vim命令;</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>关于分支模型, 标签管理等高级功能后续会继续补充…</p>
+<p>参考:<br>1、<a href="https://git-scm.com/book/en/v2" target="_blank" rel="noopener">https://git-scm.com/book/en/v2</a><br>2、<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="kingfeng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/17/zebra_printer_logo/" rel="next" title="Android实现斑马Wifi打印机打印小票图片">
+                <i class="fa fa-chevron-left"></i> Android实现斑马Wifi打印机打印小票图片
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/15/jenkins-sonarqube-manage-code-quality/" rel="prev" title="Jenkins + SonarQube 代码质量管理">
+                Jenkins + SonarQube 代码质量管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/5486542?v=3&u=010f0ba879c3264f0f35bcec76ca32b1dfa6ddb8&s=140"
+               alt="kingfeng" />
+          <p class="site-author-name" itemprop="name">kingfeng</p>
+          <p class="site-description motion-element" itemprop="description">android 开发者</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jinfengli" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.lujun.co/" title="卢俊_android" target="_blank">卢俊_android</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.zhaiyifan.cn/" title="markzhai" target="_blank">markzhai</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.isming.me/" title="码农明明桑" target="_blank">码农明明桑</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://liuzhichao.com/archives/" title="liuzhichao_android" target="_blank">liuzhichao_android</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://miao.hu/" title="紅一葉" target="_blank">紅一葉</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://weishu.me/" title="weishu_android" target="_blank">weishu_android</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git特点"><span class="nav-number">1.</span> <span class="nav-text">Git特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个最常用的"><span class="nav-number">2.</span> <span class="nav-text">几个最常用的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三种状态切换"><span class="nav-number">3.</span> <span class="nav-text">三种状态切换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-gt-b"><span class="nav-number">3.1.</span> <span class="nav-text">a-&gt;b</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-gt-a"><span class="nav-number">3.2.</span> <span class="nav-text">b-&gt;a</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#b-gt-c"><span class="nav-number">3.3.</span> <span class="nav-text">b-&gt;c</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-gt-b"><span class="nav-number">3.4.</span> <span class="nav-text">c-&gt;b</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别名Alias"><span class="nav-number">4.</span> <span class="nav-text">别名Alias</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-pull-amp-git-fetch"><span class="nav-number">5.</span> <span class="nav-text">git pull &amp; git fetch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitignore忽略文件"><span class="nav-number">6.</span> <span class="nav-text">.gitignore忽略文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">7.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它"><span class="nav-number">8.</span> <span class="nav-text">其它</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kingfeng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'kingfeng';
+      var disqus_identifier = '2018/02/26/using-git-summary/';
+
+      var disqus_title = "git 常用操作汇总";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
