@@ -95,10 +95,24 @@
 <meta property="og:site_name" content="kingfeng&#39;s Notes">
 <meta property="og:description" content="公司最近使用SonarQube 代码规范统一管理。虽然在Android Studio 里面安装SonarLinit及 SonarQube Community Plugin 插件简单配置一下就可以实现，这种情况适用于在开发者本地代码质量管理。但在测试，生产等环境是并不合适，所以我们想着把SonarQube配置到Jenkins上去，方便扫描代码质量后进行自动打包。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-31T11:06:39.055Z">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/as-sonar-properties.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/hexo-sonar-scanner.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/analysis%20successful.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/sonar-result.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-sonar-create-proj.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/set-sonar-servers.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/sonar-set-token.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/set-sonar-scanner.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/execute-sonarqube-scanner.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-success.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-log1.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-log2.png">
+<meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-log1.png">
+<meta property="og:updated_time" content="2018-10-30T06:28:46.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins + SonarQube 代码质量管理">
 <meta name="twitter:description" content="公司最近使用SonarQube 代码规范统一管理。虽然在Android Studio 里面安装SonarLinit及 SonarQube Community Plugin 插件简单配置一下就可以实现，这种情况适用于在开发者本地代码质量管理。但在测试，生产等环境是并不合适，所以我们想着把SonarQube配置到Jenkins上去，方便扫描代码质量后进行自动打包。">
+<meta name="twitter:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/as-sonar-properties.png">
 
 
 
@@ -366,46 +380,24 @@
 <li>MySQL 客户端版本要求是 5.6.2 以上；</li>
 <li>防火墙关掉试试；</li>
 </ol>
-<p>把sonar-scanner的路径配置到环境变量里面， 并在 Android Studio 根目录添加：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/as-sonar-properties.png">
-
-<p>进行sonar-scanner 代码扫描：</p>
-<p><image src="http://or7hgmr1x.bkt.clouddn.com/hexo-sonar-scanner.png"></image></p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/analysis%20successful.png">
-
-<p>扫描成功后，可以看到SonarQube上面已经有了扫描生成的日志了。</p>
-<p><image src="http://or7hgmr1x.bkt.clouddn.com/sonar-result.png"><br>接下来我们把这个工具配置到jenkins上，不用自己执行命令，让jenkins 定时帮我们自动检查代码质量，生成质量扫描结果，<br>我们只需要查看生成的日志就可以了。</image></p>
+<p>把sonar-scanner的路径配置到环境变量里面， 并在 Android Studio 根目录添加：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/as-sonar-properties.png" alt=""></p>
+<p>进行sonar-scanner 代码扫描：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/hexo-sonar-scanner.png" alt=""><br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/analysis%20successful.png" alt=""></p>
+<p>扫描成功后，可以看到SonarQube上面已经有了扫描生成的日志了。<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/sonar-result.png" alt=""></p>
+<p>接下来我们把这个工具配置到jenkins上，不用自己执行命令，让jenkins 定时帮我们自动检查代码质量，生成质量扫描结果，<br>我们只需要查看生成的日志就可以了。</p>
 <h3 id="Jenkins-SonarQube-自动代码质量检查"><a href="#Jenkins-SonarQube-自动代码质量检查" class="headerlink" title="Jenkins+SonarQube 自动代码质量检查"></a>Jenkins+SonarQube 自动代码质量检查</h3><p>本地配置Jenkins进行Android打包，这里不再赘述。</p>
-<p>首先在SonarQube上面创建项目：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/jenkins-sonar-create-proj.png">
-
+<p>首先在SonarQube上面创建项目：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-sonar-create-proj.png" alt=""></p>
 <p>上面这个标识和名称要跟我们AS项目下面创建的sonar-project.properties 里面的projectKey和projectName保持一致。</p>
-<p>需要安装SonarQube Servers 以及sonarQube Scanner plugin，并重新启动Jenkins。<br>在 “系统管理”—“系统设置”里面：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/set-sonar-servers.png">
-
+<p>需要安装SonarQube Servers 以及sonarQube Scanner plugin，并重新启动Jenkins。<br>在 “系统管理”—“系统设置”里面：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/set-sonar-servers.png" alt=""></p>
 <p>上面这个token非常关键，SenorQube5.3及以后版本使用token进行验证，从下图中获取；</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/sonar-set-token.png">
-
-<p>在“系统管理—全局工具配置”里面：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/set-sonar-scanner.png">
-
-
-<p>在Jenkins中要构建项目的”配置”中：</p>
-<p><image src="http://or7hgmr1x.bkt.clouddn.com/execute-sonarqube-scanner.png"><br>在上面方框中如果我们不想配置solar-project.properties 中,那么我们可以把 Android Studio 中 solar-project.properties 的内容配置到下面的 “Analysis properties” 中也可以。</image></p>
-<p>配置后构建成功的结果：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/jenkins-success.png">
-
-<p>整个Jenkins构建过程重要日志：</p>
-<p><image src="http://or7hgmr1x.bkt.clouddn.com/jenkins-log1.png"></image></p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/jenkins-log2.png">
-
-
-<p>SonarQube代码质量扫描结果：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/jenkins-auto-manage-quality-result.png">
-
-
+<p><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/sonar-set-token.png" alt=""></p>
+<p>在“系统管理—全局工具配置”里面：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/set-sonar-scanner.png" alt=""></p>
+<p>在Jenkins中要构建项目的”配置”中：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/execute-sonarqube-scanner.png" alt=""></p>
+<p>在上面方框中如果我们不想配置solar-project.properties 中,那么我们可以把 Android Studio 中 solar-project.properties 的内容配置到下面的 “Analysis properties” 中也可以。</p>
+<p>配置后构建成功的结果：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-success.png" alt=""></p>
+<p>整个Jenkins构建过程重要日志：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-log1.png" alt=""><br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-log2.png" alt=""></p>
+<p>SonarQube代码质量扫描结果：<br><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0515/jenkins-log1.png" alt=""></p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>SonarQube可以配置各种各样的编译工具（Gradle，maven，ant等），适应各种各样的项目结构，通过插件形式支持不同的编程语言。可以通过pmd，checkstyle，findbugs等规则工具插件检测出各种各样的bug。另外还有对扫描质量问题进行严重性划分，项目权限控制等等。 </p>
-</image></image></image></image></image></image></image></image></image>
+
       
     </div>
 
@@ -420,14 +412,14 @@
       
         
   <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>您的支持将鼓励我继续创作！</div>
+    <div>您的支持将鼓励我继续创作</div>
     <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
       <span>赏</span>
     </button>
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <img id="wechat_qr" src="http://or7hgmr1x.bkt.clouddn.com/wechat_pay.png" alt="kingfeng WeChat Pay"/>
           <p>微信打赏</p>
         </div>
       
@@ -557,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -575,7 +567,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -633,7 +625,11 @@
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://weishu.me/" title="weishu_android" target="_blank">weishu_android</a>
+                  <a href="http://weishu.me/" title="weishu" target="_blank">weishu</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://xiaoqqq.com/" title="肖老板" target="_blank">肖老板</a>
                 </li>
               
             </ul>

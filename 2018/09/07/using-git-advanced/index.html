@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="kingfeng&#39;s Notes">
 <meta property="og:description" content="接2018-02-26 那篇 git常用操作 接下来说说 branch、merge、rebase、tag用法、以及在实际项目中自己是如何使用Git的；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-08T01:53:36.333Z">
+<meta property="og:updated_time" content="2018-10-31T02:49:23.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git advanced">
 <meta name="twitter:description" content="接2018-02-26 那篇 git常用操作 接下来说说 branch、merge、rebase、tag用法、以及在实际项目中自己是如何使用Git的；">
@@ -390,7 +390,7 @@
 <li>有修改未commit时，不能进行rebase 操作；</li>
 </ol>
 <p>一图胜千言：</p>
-<image src="http://or7hgmr1x.bkt.clouddn.com/git%20rebase_merge.png" width="600" height="600">
+<image src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0907/git%20rebase_merge.png" width="600" height="600">
 
 
 <h3 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">F:\intellijRepo\JavaCodeRepo&gt;git <span class="keyword">tag</span> <span class="title">-d</span> <span class="number">0.1</span>.<span class="number">3</span>    <span class="comment"># 删除本地分支</span></span><br><span class="line">Deleted <span class="keyword">tag</span> <span class="title">'0</span>.<span class="number">1.3</span>' (was <span class="number">3879</span>fa7)</span><br><span class="line"></span><br><span class="line">F:\intellijRepo\JavaCodeRepo&gt;git <span class="keyword">tag</span> <span class="title">-a</span> v0.<span class="number">2</span> -m <span class="string">"Release version v0.2"</span>     <span class="comment"># 创建分支以及附注说明</span></span><br><span class="line"></span><br><span class="line">F:\intellijRepo\JavaCodeRepo&gt;git push origin v0.<span class="number">2</span>  <span class="comment">#  push分支</span></span><br><span class="line">Counting objects: <span class="number">1</span>, done.</span><br><span class="line">Writing objects: <span class="number">100</span>% (<span class="number">1</span>/<span class="number">1</span>), <span class="number">166</span> bytes | <span class="number">166.00</span> KiB/s, done.</span><br><span class="line">Total <span class="number">1</span> (delta <span class="number">0</span>), reused <span class="number">0</span> (delta <span class="number">0</span>)</span><br><span class="line">To gitlab.com:j<span class="literal">inf</span>engli/JavaCodeRepo.git</span><br><span class="line"> * [new <span class="keyword">tag</span>]         v0.<span class="number">2</span> -&gt; v0.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">F:\intellijRepo\JavaCodeRepo&gt;git <span class="keyword">tag</span>     <span class="title"># tag</span>列表，或使用 git <span class="keyword">tag</span> <span class="title">--list</span> 或git <span class="keyword">tag</span> <span class="title">-l</span></span><br><span class="line">v0.<span class="number">1</span></span><br><span class="line">v0.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">$ git push origin :refs/tags/v0.<span class="number">1.1</span>      <span class="comment"># 删除远程v0.1.1 tag</span></span><br><span class="line">To gitlab.com:j<span class="literal">inf</span>engli/JavaCodeRepo.git</span><br><span class="line"> - [deleted]         v0.<span class="number">1.1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">git push origin --tags   <span class="comment"># 把本地所有标签提交到远程服务端</span></span><br></pre></td></tr></table></figure>
@@ -423,14 +423,14 @@
       
         
   <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>您的支持将鼓励我继续创作！</div>
+    <div>您的支持将鼓励我继续创作</div>
     <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
       <span>赏</span>
     </button>
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <img id="wechat_qr" src="http://or7hgmr1x.bkt.clouddn.com/wechat_pay.png" alt="kingfeng WeChat Pay"/>
           <p>微信打赏</p>
         </div>
       
@@ -474,6 +474,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/29/deploy-springboot-proj-to-centos/" rel="prev" title="SpringBoot工程布署到centOS碰到的问题小结">
+                SpringBoot工程布署到centOS碰到的问题小结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -552,7 +556,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -570,7 +574,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -628,7 +632,11 @@
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://weishu.me/" title="weishu_android" target="_blank">weishu_android</a>
+                  <a href="http://weishu.me/" title="weishu" target="_blank">weishu</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://xiaoqqq.com/" title="肖老板" target="_blank">肖老板</a>
                 </li>
               
             </ul>
