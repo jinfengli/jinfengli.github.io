@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/1029/springboot-my_cnf.png">
 <meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/1029/mysql_log.png">
 <meta property="og:image" content="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/1029/kill%20tomcat%20process.png">
-<meta property="og:updated_time" content="2018-10-31T02:48:13.568Z">
+<meta property="og:updated_time" content="2018-10-31T03:51:26.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot工程布署到centOS碰到的问题小结">
 <meta name="twitter:description" content="最近项目里面有几个简单接口要写（用SpringBoot开发），开发完成要布署到远程centOS主机上供客户端调用，以前没搞过，自己就尝试着搞搞；把部署过程中自己踩的坑记录下，省得以后再给自己挖坑。 mysql登录报错： Can ‘t connect to local MySQL server through socket ‘/tmp/mysql.sock ‘(2) “;查看配置:1vi /et">
@@ -375,8 +375,8 @@
 <p>修改server.xml 如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context <span class="attribute">docBase</span>=<span class="string">"BmpServer-0.1.1-SNAPSHOT.war"</span> <span class="attribute">path</span>=<span class="string">"/bmp-dev"</span> <span class="attribute">debug</span>=<span class="string">"0"</span> <span class="attribute">reloadable</span>=<span class="string">"true"</span>&gt;&lt;/Context&gt;</span><br></pre></td></tr></table></figure></p>
 <p>以后我们在浏览器中访问的时候就通过：<br><code>http://10.xxx.xxx.xxx:8080/bmp-dev/static/pages/login.html</code>    当然，把  <code>bmp-dev</code> 替换成 <code>BmpServer-0.1.0-SNAPSHOT</code> 也是可以访问的。</p>
 <h5 id="xshell客户端-中操作的一些命令："><a href="#xshell客户端-中操作的一些命令：" class="headerlink" title="xshell客户端 中操作的一些命令："></a>xshell客户端 中操作的一些命令：</h5><p><img src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/1029/kill%20tomcat%20process.png" alt=""></p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@dev-hillin-epp<span class="number">-01</span> bin]<span class="meta"># ./shutdown.sh </span></span><br><span class="line">Using CATALINA_BASE: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_HOME: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_TMPDIR: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>temp </span><br><span class="line">Using JRE_HOME: <span class="meta-keyword">/opt/</span>jdk1<span class="number">.8</span><span class="number">.0</span>_181/jre </span><br><span class="line">Using CLASSPATH: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/bootstrap.jar:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/tomcat-juli.jar </span><br><span class="line">[root@dev-hillin-epp<span class="number">-01</span> bin]<span class="meta"># ./startup.sh  </span></span><br><span class="line">Using CATALINA_BASE: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_HOME: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_TMPDIR: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>temp </span><br><span class="line">Using JRE_HOME: <span class="meta-keyword">/opt/</span>jdk1<span class="number">.8</span><span class="number">.0</span>_181/jre </span><br><span class="line">Using CLASSPATH: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/bootstrap.jar:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/tomcat-juli.jar </span><br><span class="line">Tomcat started. </span><br><span class="line"></span><br><span class="line">[root@dev-hillin-epp<span class="number">-01</span> logs]<span class="meta"># tail -f catalina.out </span></span><br><span class="line"><span class="number">30</span>-Oct<span class="number">-2018</span> <span class="number">19</span>:<span class="number">01</span>:<span class="number">41.862</span> INFO [localhost-startStop<span class="number">-1</span>] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>webapps/BmpServer] has finished in [<span class="number">15</span>] ms</span><br></pre></td></tr></table></figure>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>遇到问题的时候一定要首先看日志， 像是<code>tomcat/logs</code>下通过<code>tail -f catalina.out</code>       查看详细的日志， mysql 中 <code>vi  /var/log/mysqld.log</code>  查看所有mysql 日志，确定问题的大致范围，再去解决，走的弯路就会少些。<br>以前很少用Linux。<br>这次布署对Linux相关的命令熟悉了不少，通过自己到网上寻找解决办法，对后台远程主机布署有了一些基础的理解，Linux相关的知识自己很弱，学习任重道远…</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@dev-hillin-epp<span class="number">-01</span> bin]<span class="meta"># ./shutdown.sh </span></span><br><span class="line">Using CATALINA_BASE: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_HOME: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_TMPDIR: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>temp </span><br><span class="line">Using JRE_HOME: <span class="meta-keyword">/opt/</span>jdk1<span class="number">.8</span><span class="number">.0</span>_181/jre </span><br><span class="line">Using CLASSPATH: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/bootstrap.jar:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/tomcat-juli.jar </span><br><span class="line">[root@dev-hillin-epp<span class="number">-01</span> bin]<span class="meta"># ./startup.sh  </span></span><br><span class="line">Using CATALINA_BASE: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_HOME: <span class="meta-keyword">/usr/</span>local/tomcat </span><br><span class="line">Using CATALINA_TMPDIR: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>temp </span><br><span class="line">Using JRE_HOME: <span class="meta-keyword">/opt/</span>jdk1<span class="number">.8</span><span class="number">.0</span>_181/jre </span><br><span class="line">Using CLASSPATH: <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/bootstrap.jar:<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>bin/tomcat-juli.jar </span><br><span class="line">Tomcat started. </span><br><span class="line"></span><br><span class="line"><span class="meta"># tail -f catalina.out    查看tomcat启动日志文件</span></span><br><span class="line">[root@dev-hillin-epp<span class="number">-01</span> logs]<span class="meta"># tail -f catalina.out </span></span><br><span class="line"><span class="number">30</span>-Oct<span class="number">-2018</span> <span class="number">19</span>:<span class="number">01</span>:<span class="number">41.862</span> INFO [localhost-startStop<span class="number">-1</span>] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/tomcat/</span>webapps/BmpServer] has finished in [<span class="number">15</span>] ms</span><br></pre></td></tr></table></figure>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>遇到问题的时候一定要首先看日志， 像是<code>tomcat/logs</code>下通过<code>tail -f catalina.out</code>       查看详细的日志， mysql 中 <code>vi  /var/log/mysqld.log</code>  查看所有mysql 日志，确定问题的大致范围，再去解决，走的弯路就会少些。<br>这次布署经历对xshell命令操作远程主机也有了一定认识，通过自己到网上寻找解决办法，对后台如何部署有了大概的理解，Linux相关的知识自己很弱，学习任重道远…</p>
 
       
     </div>
@@ -399,7 +399,7 @@
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://or7hgmr1x.bkt.clouddn.com/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
           <p>微信打赏</p>
         </div>
       
@@ -440,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/07/using-git-advanced/" rel="next" title="git advanced">
-                <i class="fa fa-chevron-left"></i> git advanced
+              <a href="/2018/09/07/using-git-advanced/" rel="next" title="git 进阶">
+                <i class="fa fa-chevron-left"></i> git 进阶
               </a>
             
           </div>
@@ -610,6 +610,10 @@
                   <a href="https://xiaoqqq.com/" title="肖老板" target="_blank">肖老板</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://miao1007.github.io/archives/" title="miao1007" target="_blank">miao1007</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -629,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql登录报错：-Can-‘t-connect-to-local-MySQL-server-through-socket-‘-tmp-mysql-sock-‘-2-“"><span class="nav-number">1.</span> <span class="nav-text">mysql登录报错： Can ‘t connect to local MySQL server through socket ‘/tmp/mysql.sock ‘(2) “;</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql常见操作命令："><span class="nav-number">1.1.</span> <span class="nav-text">mysql常见操作命令：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#centOS-tomcat布署-SpringBoot-war包："><span class="nav-number">2.</span> <span class="nav-text">centOS/tomcat布署 SpringBoot war包：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#xshell客户端-中操作的一些命令："><span class="nav-number">2.1.</span> <span class="nav-text">xshell客户端 中操作的一些命令：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number"></span> <span class="nav-text">总结：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql登录报错：-Can-‘t-connect-to-local-MySQL-server-through-socket-‘-tmp-mysql-sock-‘-2-“"><span class="nav-number">1.</span> <span class="nav-text">mysql登录报错： Can ‘t connect to local MySQL server through socket ‘/tmp/mysql.sock ‘(2) “;</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mysql常见操作命令："><span class="nav-number">1.1.</span> <span class="nav-text">mysql常见操作命令：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#centOS-tomcat布署-SpringBoot-war包："><span class="nav-number">2.</span> <span class="nav-text">centOS/tomcat布署 SpringBoot war包：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#xshell客户端-中操作的一些命令："><span class="nav-number">2.1.</span> <span class="nav-text">xshell客户端 中操作的一些命令：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">3.</span> <span class="nav-text">总结：</span></a></li></ol></div>
             
 
           </div>
@@ -650,7 +654,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

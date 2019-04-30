@@ -90,14 +90,14 @@
 <meta name="description" content="接2018-02-26 那篇 git常用操作 接下来说说 branch、merge、rebase、tag用法、以及在实际项目中自己是如何使用Git的；">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git advanced">
+<meta property="og:title" content="git 进阶">
 <meta property="og:url" content="http://jinfengli.github.io/2018/09/07/using-git-advanced/index.html">
 <meta property="og:site_name" content="kingfeng&#39;s Notes">
 <meta property="og:description" content="接2018-02-26 那篇 git常用操作 接下来说说 branch、merge、rebase、tag用法、以及在实际项目中自己是如何使用Git的；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-31T02:49:23.651Z">
+<meta property="og:updated_time" content="2019-04-30T02:45:15.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git advanced">
+<meta name="twitter:title" content="git 进阶">
 <meta name="twitter:description" content="接2018-02-26 那篇 git常用操作 接下来说说 branch、merge、rebase、tag用法、以及在实际项目中自己是如何使用Git的；">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <title> git advanced | kingfeng's Notes </title>
+  <title> git 进阶 | kingfeng's Notes </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -293,7 +293,7 @@
             
             
               
-                git advanced
+                git 进阶
               
             
           </h1>
@@ -389,7 +389,7 @@
 <li>冲突处理策略不同：<br>  merge遇到冲突直接停止，解决冲突commit后才能再次commit；<br>  rebase遇到冲突会暂停当前操作，开发者可以手动选择解决冲突，开发者可以选择手动解决冲突，然后 git rebase –continue 继续，<br>  或者 –skip 跳过(注意此操作中当前分支的修改会直接覆盖目标分支的冲突部分),<br>  或者 –abort 直接停止该次rebase 操作。     </li>
 <li>有修改未commit时，不能进行rebase 操作；</li>
 </ol>
-<p>一图胜千言：</p>
+<p>看下图：</p>
 <image src="https://github-blog-1257093425.cos.ap-guangzhou.myqcloud.com/2018/0907/git%20rebase_merge.png" width="600" height="600">
 
 
@@ -405,9 +405,7 @@
 <li>执行 git merge dev，合并dev分支的修改；</li>
 <li>在master分之上提交代码到远程仓库；      git push origin master</li>
 </ol>
-<h3 id="git-修改-gitignore-文件忽略不起作用"><a href="#git-修改-gitignore-文件忽略不起作用" class="headerlink" title="git 修改.gitignore 文件忽略不起作用"></a>git 修改.gitignore 文件忽略不起作用</h3><p>可以使用下面方式：<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rm -f --cached -r .idea     <span class="comment"># 把.idea 文件夹从git追踪中排除； </span></span><br><span class="line">                                <span class="comment">#也可以使用 git rm -r --cached .  删除本地缓存，让文件改为未track</span></span><br><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br><span class="line"><span class="bash">git commit -m <span class="string">'modify .gitignore'</span></span></span><br></pre></td></tr></table></figure></p>
-<p>看一下执行效果：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">F:platform-xxx&gt;git rm -f --cached -r .idea</span><br><span class="line">rm '.idea/caches/build_file_checksums.ser'</span><br><span class="line">rm '.idea//ProjcodeStylesect.xml'</span><br><span class="line">rm '.idea/dbnavigator.xml'</span><br><span class="line">rm '.idea/gradle.xml'</span><br><span class="line">rm '.idea/misc.xml'</span><br><span class="line">rm '.idea/runConfigurations.xml'</span><br><span class="line">rm '.idea/sonarlint/issuestore/0/2/02e99b96f9ad605bf6cff133c88f60a<span class="number">9008</span>cebd9'</span><br><span class="line">rm '.idea/sonarlint/issuestore/0/4/04cc233f<span class="number">9221</span>dea906f58e66f4fa36f1d447f25c'</span><br></pre></td></tr></table></figure></p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>对于git理解只算是了解了冰山一角，  想更深入理解，请多使用 <code>git  xxx  --help</code> 看官方的文档；</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>对于git理解只算是了解了冰山一角，想更深入理解，请多使用 <code>git xxx  --help</code> 看官方的文档；</p>
 </image>
       
     </div>
@@ -430,7 +428,7 @@
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://or7hgmr1x.bkt.clouddn.com/wechat_pay.png" alt="kingfeng WeChat Pay"/>
+          <img id="wechat_qr" src="/images/wechat_pay.png" alt="kingfeng WeChat Pay"/>
           <p>微信打赏</p>
         </div>
       
@@ -639,6 +637,10 @@
                   <a href="https://xiaoqqq.com/" title="肖老板" target="_blank">肖老板</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://miao1007.github.io/archives/" title="miao1007" target="_blank">miao1007</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -658,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch"><span class="nav-number">1.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-merge-amp-rebase-衍合"><span class="nav-number">2.</span> <span class="nav-text">git merge &amp; rebase(衍合)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rebase"><span class="nav-number">2.1.</span> <span class="nav-text">rebase:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#merge-与rebase区别："><span class="nav-number">2.2.</span> <span class="nav-text">merge 与rebase区别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-tag"><span class="nav-number">3.</span> <span class="nav-text">git tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-实际项目中应用"><span class="nav-number">4.</span> <span class="nav-text">git 实际项目中应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-修改-gitignore-文件忽略不起作用"><span class="nav-number">5.</span> <span class="nav-text">git 修改.gitignore 文件忽略不起作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch"><span class="nav-number">1.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-merge-amp-rebase-衍合"><span class="nav-number">2.</span> <span class="nav-text">git merge &amp; rebase(衍合)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rebase"><span class="nav-number">2.1.</span> <span class="nav-text">rebase:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#merge-与rebase区别："><span class="nav-number">2.2.</span> <span class="nav-text">merge 与rebase区别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-tag"><span class="nav-number">3.</span> <span class="nav-text">git tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-实际项目中应用"><span class="nav-number">4.</span> <span class="nav-text">git 实际项目中应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">5.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
@@ -679,7 +681,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -785,7 +787,7 @@
       var disqus_shortname = 'kingfeng';
       var disqus_identifier = '2018/09/07/using-git-advanced/';
 
-      var disqus_title = "git advanced";
+      var disqus_title = "git 进阶";
 
 
       function run_disqus_script(disqus_script) {
